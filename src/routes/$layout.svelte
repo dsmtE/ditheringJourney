@@ -1,9 +1,12 @@
 <script lang="ts">
 	import Header from '$lib/Header/index.svelte';
+	import GithubCorner from '$lib/components/GithubCorner.svelte';
 	import '../app.postcss';
 </script>
 
 <Header />
+
+<GithubCorner link='https://github.com/dsmtE/ditheringJourney'/>
 
 <main>
 	<slot />
