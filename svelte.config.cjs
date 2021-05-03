@@ -4,7 +4,11 @@ const preprocess = require('svelte-preprocess');
 module.exports = {
 	// Consult https://github.com/sveltejs/svelte-preprocess
 	// for more information about preprocessors
-	preprocess: preprocess(),
+	preprocess: [
+		preprocess({
+			postcss: true
+		}),
+	],
 
 	// an array of file extensions that should be treated as Svelte components
 	extensions: ['.svelte', '.md'],
