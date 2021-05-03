@@ -1,6 +1,19 @@
 <script lang="ts">
 	import { page } from '$app/stores';
+	import { each } from 'svelte/internal';
 	import logo from './svelte-logo.svg';
+
+	type PathEntry = {
+		name: string;
+		route: string;
+	};
+
+	const paths: PathEntry[] = [
+		{name: 'Home', route: '/'}, 
+		{name: 'About', route: '/about'},
+		{name: 'Todos', route: '/todos'},
+	];
+	
 </script>
 
 <header>
@@ -11,17 +24,11 @@
 	</div>
 
 	<nav>
-		<svg viewBox="0 0 2 3" aria-hidden="true">
-			<path d="M0,0 L1,2 C1.5,3 1.5,3 2,3 L2,0 Z"/>
-		</svg>
 		<ul>
-			<li class:active={$page.path === '/'}><a sveltekit:prefetch href="/">Home</a></li>
-			<li class:active={$page.path === '/about'}><a sveltekit:prefetch href="/about">About</a></li>
-			<li class:active={$page.path === '/todos'}><a sveltekit:prefetch href="/todos">Todos</a></li>
+			{#each paths as pathentry}
+				<li class:active={$page.path === pathentry.route}><a sveltekit:prefetch href={pathentry.route}>{pathentry.name}</a></li>
+			{/each}
 		</ul>
-		<svg viewBox="0 0 2 3" aria-hidden="true">
-			<path d="M0,0 L0,3 C0.5,3 0.5,3 1,2 L2,0 Z"/>
-		</svg>
 	</nav>
 
 	<div class="corner">
