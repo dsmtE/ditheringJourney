@@ -12,6 +12,7 @@
 		{name: 'Home', route: '/'}, 
 		{name: 'About', route: '/about'},
 		{name: 'Todos', route: '/todos'},
+		{name: 'exemple', route: '/exampleMarkdown'},
 	];
 	
 </script>
