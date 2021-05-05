@@ -1,5 +1,6 @@
 <script lang='ts'>
 
+    import Canvas from '$lib/components/Canvas.svelte';
     type Dog = {
         name: string;
         gender: string;
@@ -103,6 +104,8 @@ which you wish to be displayed literally, ex.: \`foo\`, \*bar\*, etc.
 
 This mention --- @svelte-add --- will turn into a link to the `svelte-add` GitHub page because the `remark-github` plugin is setup.
 
+
+<Canvas width=512 height=512/>
 
 # table
 
