@@ -1,59 +1,35 @@
-<script context="module" lang="ts">
-	export const prerender = true;
-</script>
-
 <script lang="ts">
-	import Counter from '$lib/components/Counter.svelte';
+
+  import Tag from "$lib/components/Tag.svelte";
+
+  import { onMount } from 'svelte';
+  
+	onMount(async () => {
+    const postsFiles = import.meta.glob('../routes/articles/*.svx');
+    const postsPromises = [];
+    for (const path in postsFiles)
+    postsPromises.push(postsFiles[path]().then(({metadata}) => metadata));
+    
+    posts = await Promise.all(postsPromises);
+	});
+  
+  let posts = [];
+
 </script>
 
-<svelte:head>
-	<title>Home</title>
-</svelte:head>
+<div>
+  <ul class="flex flex-col my-20">
+    {#each posts as {title, tags, description, slug}}
+    <li class="list-none mb-4">
+      <a class=" space-y-3 text-2xl" rel="prefetch" href="articles/{slug}"> {title} </a>
+        <p class="text-sm"> {description} </p>
+        {#if tags.length > 0}
+          <p class="text-sm font-normal text-gray-500">
+            Tags: {#each tags as tag} <Tag {tag} /> {/each}
+          </p>
+        {/if}
+    </li>
+    {/each}
+  </ul>
 
-<section>
-	<h1>
-		<div class="welcome">
-			<picture>
-				<source srcset="svelte-welcome.webp" type="image/webp">
-				<img src="svelte-welcome.png" alt="Welcome"/>
-			</picture>
-		</div>
-
-		to your new<br />SvelteKit app
-	</h1>
-
-	<h2>
-		try editing <strong>src/routes/index.svelte</strong>
-	</h2>
-
-	<Counter />
-</section>
-
-<style style lang="postcss">
-	section {
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-		flex: 1;
-	}
-
-	h1 {
-		width: 100%;
-	}
-
-	.welcome {
-		position: relative;
-		width: 100%;
-		height: 0;
-		padding: 0 0 calc(100% * 495 / 2048) 0;
-	}
-
-	.welcome img {
-		position: absolute;
-		width: 100%;
-		height: 100%;
-		top: 0;
-		display: block;
-	}
-</style>
+</div>

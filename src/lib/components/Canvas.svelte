@@ -1,7 +1,7 @@
 <script lang="ts">
 
-    export let width : number = 256;
-    export let height : number = 256;
+    export let width = 256;
+    export let height = 256;
 	import { onMount } from 'svelte';
     import { isLittleEndian } from '$lib/core/utils';
 	
@@ -58,8 +58,6 @@
 
 <style>
 	canvas {
-		width: 100%;
-		height: 100%;
 		background-color: white;
 	}
 </style>
