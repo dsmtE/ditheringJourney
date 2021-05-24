@@ -1,6 +1,16 @@
-<script lang='ts'>
+---
+title: 'Exemple markdown'
+slug: 'exampleMarkdown'
+description: 'A brief reference to the possibilities offer within this webste markdown'
+tags: [ { name: 'Svelte Kit', link: 'https://kit.svelte.dev/' }, { name: 'Tailwind', link: 'https://www.tailwindcss.com' }, { name: 'Markdown', link: 'https://www.markdownguide.org/'} ]
+published_at: '05/05/2021'
+---
 
-    import Canvas from '$lib/components/Canvas.svelte';
+<script lang='ts'>
+  import './markdown.postcss';
+  import PostHeader from '$lib/components/PostHeader.svelte';
+
+      import Canvas from '$lib/components/Canvas.svelte';
     type Dog = {
         name: string;
         gender: string;
@@ -13,8 +23,10 @@
         {name: 'Ramsay', gender: 'male', breed: 'Native American Indian Dog'},
         {name: 'Oscar ', gender: 'male', breed: 'German Shorthaired Pointer'}
     ];
-
 </script>
+
+<PostHeader {title} {published_at} {tags} />
+
 **Note that despite this file having an md extension, it can support all Svelte language features (like scripting). Do not import untrusted or user-created markdown files.**
 
 *This markdown sample was taken from [here](https://gist.github.com/rt2zz/e0a1d6ab2682d2c47746950b84c0b6ee).*
@@ -105,7 +117,7 @@ which you wish to be displayed literally, ex.: \`foo\`, \*bar\*, etc.
 This mention --- @svelte-add --- will turn into a link to the `svelte-add` GitHub page because the `remark-github` plugin is setup.
 
 
-<Canvas width=512 height=512/>
+<Canvas width=512 height=256 />
 
 # table
 
