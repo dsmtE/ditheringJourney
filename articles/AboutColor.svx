@@ -1,0 +1,171 @@
+---
+title: 'About Colors'
+slug: 'AboutColors'
+outline: 'About the science of color and the fascinating world of human perception and the scientists that attempt to define it.'
+tags: [ ]
+published_at: '05/05/2021'
+---
+
+<script lang='ts'>
+    import './markdown.postcss';
+    import PostHeader from '$lib/components/PostHeader.svelte';
+</script>
+
+<PostHeader {title} {published_at} {tags} />
+
+# Introduction
+
+**What is a color?**
+Simple question that seem insignificant at first, but that open up a much more complex subject than we might think.
+
+Today colors are everywhere, books, movies, clothes, ...
+In this crazy world of colors, it is necessary to establish a system to agree and manage all these nuances, the various monitors of displays. 
+What does it mean to have a 100% red color ? Most people think they know, but we will see that it is not so simple.
+In this article we will discuss the history of colors, how human perception plays a key role in the standards set today and why this is interesting for us.
+
+# the human perception
+
+Physically, colors are defined by wavelengths, it is light and is therefore subjective to human perception. 
+
+you can think of light as a pipeline in which there are several steps.
+
+(photo: light - eyes - brain)
+
+the light bounces around the world and then reaches your eyes, sensors (rods and cones) are then responsible for converting the light waves into signals to your brain.
+
+light is a spectrum, we can only distinguish a small part of the light spectrum (we can't distinguish ultraviolet or infrared light for example)
+
+(spectre de la lumière visible)
+
+this small part of the visible spectrum is a simple biological fact, of how we, human, we perceive the light and it is in that something completely subjective to the human.
+
+For example, everything that is hot emits light in the form of radiation but we are not made to perceive these wavelengths.
+If we were made differently, like flies or bees for example, we would perceive different parts of the light spectrum.
+
+---
+
+Let's go back to our human pipeline. 
+We have 3 cones that are responsible for perceiving different parts of the visible spectrum and this is what allows us to compose the colors. The cones seem to be aligned on three parts/colors of the light spectrum of thoses wavelengths corresponding to red, green and blue.
+
+(cones et spectre)
+
+We can say that each cone produces a signal/number for our brain, and it is this combination of three values that allows us to describe and define colors.
+This is not necessarily intuitive, why only 3 values to define a phenomenon which is so much complex as the light? It comes from the way we human perceive the world.
+
+An interesting fact is that two spectrum can lead to the same excitation of our cones. Indeed, the perception is lossy operation and thus two different observations (spectrums) can lead to the same perception of color (we speak of metamer color). 
+
+You may think that the green of the grass, the leaves or your tea are the same green, but in fact you perceive them as the same but they do not transmit the same light spectrum at all.
+
+And this is also how modern displays work. It's all about tickle those cones just well enough to predict that you see those colors. It's not about recreating the whole spectrum but just making it seem like you're seeing the wanted colors.
+
+Being able to talk about these colors and understand each other is essential. Even if, as we have seen, it belongs to our heads and something subjective to individuals, we need something to agree on and to be able to say "hey, this is the color I'm talking about".
+
+# Color spaces
+
+Distinguishing colors may seem trivial but it is not and that's why the International Commission on Illumination (CIE) was created to establish standards to be able to communicate properly and characterize rationally the colors of light as seen by the human brain.
+
+to make a long story short, given a trichromatic system (has we seen before),we can use linear equations  to build a multitude of systems with interesting properties to describe a set of colors (called gamut). 
+Proposed by Jhon Guild, this system, although abstract, of additive primary colors brings interesting mathematical advantages and makes it possible to create that we call color spaces.
+
+After having fixed three primary colors it is possible by linary combinations to compose the other colors in a triangle linking these 3 primary colors. We realize then that we can not compose all visible colors because some are outside the triangle (gamut). We can make this parallel with modern screens, it is impossible for a screen to recreate all the colors with a fixed set of colors.
+
+To cover the maximum of colors it was necessary to be creative. For example let us say a cyan color impossible to constitute by combinations of the two primary colors green and blue. What we can do instead, is to add a negative color, and it is by this trick that we succeeded in defining the entirety of the visible colors.
+
+The CIE RGB space is based on experiments conducted by John Guild and William David Wright on human vision in the 1920s with a sample of the population without visual defect.
+
+The RGB spaces have the disadvantage of using negative components to characterize the very saturated colors not included in the gamut. But these negative "colors" are really weird and that brings a lot of problems and limits.
+
+To describe all the colors distinguished by the human vision and thus to escape the arbitrary character of a particular RGB space, the CIE also defined the same year the space CIE XYZ and thus founded the scientific colorimetry.
+
+(image xyz space)
+
+To summarize, In 1931, the CIE thus formalized two color spaces which were each at the origin of a family used by the professionals. 
+One, CIE RGB, has the advantage of simplicity, which is paid by a limited gamut; it is used with its derivatives for the description of devices. 
+The other, CIE XYZ, pays by a certain abstraction an exhaustive representation of the visible colors; in a slightly modified form, it is useful in particular for the management of the color and the transmission of information between apparatuses having different gamuts.
+
+but where is the rgb(or sRGB) as we hear it today in all this ?
+The sRGB is a subset of the space cie-xyz. it must necessarily be a subset that can be represented by three primary colors because that is how our screens work.
+
+but the srgb is a standard used a little everywhere nowadays without necessarily understanding it really.
+
+# log vs linear
+
+When we look at a linear gradient of brightness for example, we are much more able to tell the difference between dark colors than light colors.
+
+(photo we better distinguishes variation in dark scene than in relative light scene)
+(gradient photo to show the posterisation effect)
+
+after realizing this we found out that it was not interesting to distribute the color levels in a uniform way but more interesting to keep more details (and therefore more digital bits) in the dark levels. 
+and it makes sense, if we are numerically limited to describe a color it is interesting to put the more information where it is necessary for us, as humans.
+
+what we do in addition to color space conversion (linear transformation) and apply what is called a gamma curve ( nearly) a square root but it is not totally)
+
+# the problem
+
+the big point is that it is not a linear space at all! 
+And thus what happening is that maths in sRGB space does not make sense and are not correct.
+IF we add two color in sRGB space, you wont get the color you woul get if we add those colors in real life.
+
+Math on normal sRGB number is wrong !
+and that the bigger problem of many software today.
+For exemple if we blur some image in sRGB space we will get incorrect and to dark color in blender areas because we blend those colors in non linear and correct color space for our colors perception.
+
+We can work in linear RGb for exemple, the same space without the gamma corrected colors.
+
+We there still remain some problem. because we still as human perceiving some colors with different brightness. For exemple we have the tendency to perceives the yellow brighter than blue.
+
+The answer is another colors CIE Lab.
+This color space is build to be perceptually uniform.
+(linear rgb vs perceptual color in lab space)
+
+A perceptually uniform color space.
+> Intentionally apply non linear operation to math align to what humans *expect* to see.
+
+# in practice: why is relevant for us (clusturing)
+
+In our case, it will be interesting to be able to measure distances between the colors to enable us to define the principal colors of an image by clustering the various colors of the target image.
+
+As we have just seen it to measure the different in space sRGB is not very relevant and we will thus place us in space CIE L*a*b to measure these distances with what one calls $\delta E$
+
+##  delta E
+
+The color difference (called $\delta E76$ or $\delta E_{ab}$) is a measure of the visual difference between two colors, in a perceptually uniform color space as L*a*b* established in 1976 by the International Commission on Illumination (CIE).
+
+$$ \Delta E^*_{ab} ={\sqrt {(L_{2}^{*}-L_{1}^{*})^{2}+(a_{2}^{*}-a_{1}^{*})^{2}+(b_{2}^{*}-b_{1}^{*})^{2}}}} où :
+
+> where: 
+> $L_1^*,*a_1^*,b_1^*$ are the coordinates in color space of the first color to be compared and $L_2^*,*a_2^*,b_2^*$ are those of the second.
+> is the Euclidean distance in L*a*b* space.
+
+(image exemple)
+Colors at equal distance in Lab space (so having the same delta E) should be perceived by the human eye as having the same color difference.
+
+This makes sense, measuring Directly distance in CIELAB space should work, right?
+
+If the relative importance of luminance compared to saturation and hue is correctly minimized, the other factors of the perceptual relativity of our vision are little or not taken into account.
+
+The example above demonstrates that for hues in the same lightness it works well. But what happens when we have two saturated colors of different hues?
+
+(image exemple)
+The two above blocks represent the dark blue and dark red and we see directly the problem, 
+
+This is why other more precise, but more complex formulas of ∆E have been developed by the CIE such as the ∆E94 and the ∆E00, whose names naturally recall the years of their publication.
+
+So, in 1994, the original Delta E formula was improved. The new formula would take into account certain weighting factors for each lightness, chroma, and hue value. It also introduced the ability to add a modifier according to the use case: either textile, or graphic arts.
+
+(formulas Delta E94)
+
+CIE94 introduced a conversion of the given Lab value into CIE L*C*h (Lch). The two color models differ in that Lch represents hue as an angle instead of infinite points of color. This allows us to more easily troubleshoot and perform calculations on hue.
+
+but if we took different colors with same lightness but opposite hue, $\delta E94$ will be equal to 128 (polar opposite in hue) while CIE2000 more correctly calculates ΔE 49.4 (middle of the road).
+
+Finally, the CIE organization decided to fix the lightness inaccuracies by introducing dE00. It’s currently the most complicated, yet most accurate, CIE color difference algorithm available.
+
+(de00 formulas)
+
+
+Sources:
+
+- [CIE](http://cie.co.at/)
+- [The CIEDE2000 Color-Difference
+Formula](http://www2.ece.rochester.edu/~gsharma/ciede2000/ciede2000noteCRNA.pdf)
