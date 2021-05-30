@@ -4,7 +4,8 @@ import remarkEmoji from 'remark-emoji';
 import remarkMath from 'remark-math';
 import rehypeSlug from 'rehype-slug';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
-import rehypeKatex from 'rehype-katex';
+import rehypeKatexSvelte from "rehype-katex-svelte";
+import rehypeFigure from "rehype-figure";
 
 export default {
 	extensions: [".svx", ".md"],
@@ -13,7 +14,6 @@ export default {
 	},
 	remarkPlugins: [
 		[remarkGithub, {
-			// Use your own repository
 			repository: "https://github.com/dsmtE/ditheringJourney",
 		}],
 		remarkAbbr,
@@ -21,10 +21,11 @@ export default {
 		remarkMath,
 	],
 	rehypePlugins: [
+		rehypeKatexSvelte,
 		rehypeSlug,
 		[rehypeAutolinkHeadings, {
 			behavior: "wrap",
 		}],
-		rehypeKatex,
+		[rehypeFigure, { className: "figure" }]
 	],
 };
