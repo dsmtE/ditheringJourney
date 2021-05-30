@@ -3,7 +3,6 @@
   import Tag from "$lib/components/Tag.svelte";
 
   import { onMount } from 'svelte';
-  
   import { base } from '$app/paths';
 
   export async function load({ fetch }) {
@@ -13,7 +12,7 @@
       props: { posts }
     }
   }
-
+  
 	onMount(async () => {
     const postsFiles = import.meta.glob('../routes/articles/*.svx');
     const postsPromises = [];
@@ -31,7 +30,7 @@
   <ul class="flex flex-col my-20">
     {#each posts as {title, tags, description, slug}}
     <li class="list-none mb-4">
-      <a class=" space-y-3 text-2xl" rel="prefetch" href="articles/{slug}"> {title} </a>
+      <a class=" space-y-3 text-2xl" rel="prefetch" href="{base}/articles/{slug}"> {title} </a>
         <p class="text-sm"> {description} </p>
         {#if tags.length > 0}
           <p class="text-sm font-normal text-gray-500">

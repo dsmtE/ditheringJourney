@@ -6,6 +6,9 @@ small blog posts about dithering and image made for a personal project at IMAC e
 
 Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
 
+:warning:  Comment the paths kit option in the file svelte.config.js if wants to run in dev mode.
+> this is used to deploy correctly on githubPage sub-Repository
+
 ```bash
 npm run dev
 

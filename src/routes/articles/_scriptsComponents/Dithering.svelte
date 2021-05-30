@@ -16,14 +16,14 @@
 	
 	import { onMount } from 'svelte';
     import { BayerDithering, FloydDithering } from '$lib/core/dithering';
-	
+	import { base } from '$app/paths';
 
 	function loadImage(url) {
 		return new Promise(r => { let i = new Image(); i.onload = (() => r(i)); i.src = url; });
 	}
 	
 	onMount(async () => {
-		let img = await loadImage("../imgs/mountains.jpg") as HTMLImageElement;
+		let img = await loadImage(`${base}/imgs/mountains.jpg`) as HTMLImageElement;
 
 		canvasCopy.width = img.width;
         canvasCopy.height = img.height;

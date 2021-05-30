@@ -1,6 +1,7 @@
 <script lang="ts">
 
   import { onMount } from 'svelte';
+  import { base } from '$app/paths';
   
 	onMount(async () => {
     const postsFiles = import.meta.glob('../routes/articles/*.svx');
@@ -27,7 +28,7 @@
 
 <div class="flex flex-col h-full px-4 grayBr">
   <div class="grayBb h-50 py-10 text-center">
-    <a href="/" class="title">Dithering Journey</a>
+    <a href="{base}/" class="title">Dithering Journey</a>
     <p class=" mt-6"> small blog posts about dithering and image made for a personal project at IMAC engineering school</p>
   </div>
   <div class="flex-grow">
@@ -36,7 +37,7 @@
       <ul class="flex justify-between flex-col list-outside list-disc text-left">
         {#each posts as {title, description, slug}}
           <li class=" my-4">
-            <a class="underline space-y-3" rel="prefetch" href="/articles/{slug}"> {title}</a>
+            <a class="underline space-y-3" rel="prefetch" href="{base}/articles/{slug}"> {title}</a>
             <p class="text-xs overflow-hidden whitespace-nowrap overflow-ellipsis "> {description} </p>
           </li>
         {/each}
@@ -47,7 +48,7 @@
     <p class=" my-2"> Made using </p>
     <div class="flex flex-wrap justify-center">
       {#each logos as {name, url}}
-        <a class="flex justify-center" href={url} target="_blank" title={name}> <img class="m-1 h-5" alt={name} src={"/brands/"+ name + ".svg"} /> </a>
+        <a class="flex justify-center" href={url} target="_blank" title={name}> <img class="m-1 h-5" alt={name} src={`${base}/brands/${name}.svg`} /> </a>
       {/each}
     </div>
   </div>

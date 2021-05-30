@@ -8,6 +8,7 @@ published_at: '30/05/2021'
 
 <script lang='ts'>
     import PostHeader from '$lib/components/PostHeader.svelte';
+    import { base } from '$app/paths';
 
     // article scripts
     import Gradient from './_scriptsComponents/Gradient.svelte';
@@ -48,7 +49,7 @@ One common application of dithering is to more accurately display graphics conta
 
 An example of this can be seen in the game Midwinte, an old Amiga game:
 
-![Midwinter1989](../imgs/Dithering/Midwinter1989.jpg)
+![Midwinter1989]({base}/imgs/Dithering/Midwinter1989.jpg)
 
 For example, dithering might be used in order to display a photographic image containing [millions of colors](https://en.wikipedia.org/wiki/24-bit_color) on video hardware that is only capable of showing 256 colors at a time. The 256 available colors would be used to generate a dithered approximation of the original image. Without dithering, the colors in the original image would be quantized to the closest available color, resulting in a displayed image that is a poor representation of the original.
 
@@ -68,7 +69,7 @@ In its earlier uses in newspapers, comic books, and other printed media, ditheri
 
 Comic books and other color printing worked similarly, but to simulate more shades of color than the limited palette printing presses had. Below is a sample of how printing presses processed high-quality images into a dithered image.
 
-![newspaper sample](../imgs/Dithering/newsPaperSample.png)
+![newspaper sample]({base}/imgs/Dithering/newsPaperSample.png)
 
 Dithering has been very pioneered by the printing industry, which traditionally used black ink on white paper. The most simple technique to render images in black and white is to use a **threshold**, so that all pixels darker than a certain value are coloured black. As seen in the image below, thresholding yields very poor results:
 
@@ -76,7 +77,7 @@ Dithering has been very pioneered by the printing industry, which traditionally 
 
 More recently, dithering has become popular in [web graphics](https://www.lifewire.com/when-to-use-certain-image-formats-3467831). Even though most of the population has access to high-speed internet, there is still a modest percentage of internet users that are reliant upon dial-up. Using dithering in image processing not only reduces banding of colors and shading, which creates a smoother finished image, but it also reduces the file size. This is used in the GIF well-known format.
 
-![](../imgs/Dithering/GIFDithering.gif)
+![]({base}/imgs/Dithering/GIFDithering.gif)
 
 <p class="legend"> The first image is a banded image. You can clearly see the transitions in color.</p>
 
