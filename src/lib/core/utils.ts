@@ -26,10 +26,14 @@ const toUint32 = (r: number, g: number, b: number, a: number) : number => (isLit
 
 const toabgr = (color: number): number => ( (color & 0xff) << 24) | ( (color & 0x00ff00) << 8) | ( (color & 0xff0000) >> 8) | ( (color & 0xff000000) >> 24);
 
+
+const isPowerOfTwo = (x: number) => Math.log2(x) % 1 === 0;
+
 export {
     clamp, 
     clampUint8, 
     isLittleEndian,
     toUint32,
-    toabgr
+    toabgr,
+    isPowerOfTwo
 }
