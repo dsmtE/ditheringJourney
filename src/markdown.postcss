@@ -1,0 +1,50 @@
+.blog {
+  a {
+    @apply text-indigo-600 no-underline hover:underline;
+  }
+
+  ul {
+    @apply list-inside;
+  
+    li {
+      @apply list-disc;
+    }
+  }
+
+  ol li {
+    @apply list-decimal;
+  }
+
+  h1 {
+    @apply uppercase;
+  }
+  
+  h2 {
+    @apply mt-10 mb-5 text-3xl;
+  }
+
+  pre {
+    @apply mt-5 mb-10;
+  }
+
+  p {
+    @apply my-4;
+  }
+
+  .legend {
+    @apply text-gray-600 italic text-sm text-center;
+  }
+
+  .figure {
+    @apply flex-row content-center mx-auto;
+
+    img {
+      @apply flex content-center mx-auto;
+    }
+
+    figcaption {
+      @apply text-gray-600 italic text-sm text-center;
+    }
+  }
+
+}

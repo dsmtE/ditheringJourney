@@ -30,7 +30,7 @@
         </div>
         <div bind:this={viewport} class="viewport flex-grow flex align-top justify-center">
             <div class="max-w-screen-lg flex-grow">
-                <div bind:this={contents} class="px-4 relative">
+                <div bind:this={contents} class="blog px-4 relative">
                     <slot />
                 </div>
                 <Svrollbar {viewport} {contents} />

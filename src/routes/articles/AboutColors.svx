@@ -1,21 +1,23 @@
 ---
 title: 'About Colors'
 slug: 'AboutColors'
-outline: 'About the science of color and the fascinating world of human perception and the scientists that attempt to define it.'
+description: 'About the science of color and the fascinating world of human perception and the scientists that attempt to define it.'
 tags: [ ]
-published_at: '05/05/2021'
+published_at: ''
 ---
 
 <script lang='ts'>
-    import './markdown.postcss';
     import PostHeader from '$lib/components/PostHeader.svelte';
 </script>
 
 <PostHeader {title} {published_at} {tags} />
 
+---
+
 # Introduction
 
 **What is a color?**
+
 Simple question that seem insignificant at first, but that open up a much more complex subject than we might think.
 
 Today colors are everywhere, books, movies, clothes, ...
@@ -29,13 +31,13 @@ Physically, colors are defined by wavelengths, it is light and is therefore subj
 
 you can think of light as a pipeline in which there are several steps.
 
-(photo: light - eyes - brain)
+![](../imgs/AboutColors/lightEyeBrain.jpg)
 
 the light bounces around the world and then reaches your eyes, sensors (rods and cones) are then responsible for converting the light waves into signals to your brain.
 
 light is a spectrum, we can only distinguish a small part of the light spectrum (we can't distinguish ultraviolet or infrared light for example)
 
-(spectre de la lumière visible)
+![Visible Spectrum](../imgs/AboutColors/visibleSpectrum.png)
 
 this small part of the visible spectrum is a simple biological fact, of how we, human, we perceive the light and it is in that something completely subjective to the human.
 
@@ -47,7 +49,7 @@ If we were made differently, like flies or bees for example, we would perceive d
 Let's go back to our human pipeline. 
 We have 3 cones that are responsible for perceiving different parts of the visible spectrum and this is what allows us to compose the colors. The cones seem to be aligned on three parts/colors of the light spectrum of thoses wavelengths corresponding to red, green and blue.
 
-(cones et spectre)
+![Cones sensitivity](../imgs/AboutColors/coneResponse.png)
 
 We can say that each cone produces a signal/number for our brain, and it is this combination of three values that allows us to describe and define colors.
 This is not necessarily intuitive, why only 3 values to define a phenomenon which is so much complex as the light? It comes from the way we human perceive the world.
@@ -71,34 +73,42 @@ After having fixed three primary colors it is possible by linary combinations to
 
 To cover the maximum of colors it was necessary to be creative. For example let us say a cyan color impossible to constitute by combinations of the two primary colors green and blue. What we can do instead, is to add a negative color, and it is by this trick that we succeeded in defining the entirety of the visible colors.
 
-The CIE RGB space is based on experiments conducted by John Guild and William David Wright on human vision in the 1920s with a sample of the population without visual defect.
+The CIE RGB space is based on experiments conducted by *John Guild* and *William David* Wright on human vision in the 1920s with a sample of the population without visual defect.
 
 The RGB spaces have the disadvantage of using negative components to characterize the very saturated colors not included in the gamut. But these negative "colors" are really weird and that brings a lot of problems and limits.
 
 To describe all the colors distinguished by the human vision and thus to escape the arbitrary character of a particular RGB space, the CIE also defined the same year the space CIE XYZ and thus founded the scientific colorimetry.
 
-(image xyz space)
+![CIE XYZ space](../imgs/AboutColors/xyzSPace.png)
 
 To summarize, In 1931, the CIE thus formalized two color spaces which were each at the origin of a family used by the professionals. 
 One, CIE RGB, has the advantage of simplicity, which is paid by a limited gamut; it is used with its derivatives for the description of devices. 
 The other, CIE XYZ, pays by a certain abstraction an exhaustive representation of the visible colors; in a slightly modified form, it is useful in particular for the management of the color and the transmission of information between apparatuses having different gamuts.
 
-but where is the rgb(or sRGB) as we hear it today in all this ?
+**but where is the rgb(or sRGB) as we hear it today in all this ?**
 The sRGB is a subset of the space cie-xyz. it must necessarily be a subset that can be represented by three primary colors because that is how our screens work.
 
-but the srgb is a standard used a little everywhere nowadays without necessarily understanding it really.
+But the srgb is a standard used a little everywhere nowadays without necessarily understanding it really.
 
 # log vs linear
 
 When we look at a linear gradient of brightness for example, we are much more able to tell the difference between dark colors than light colors.
 
 (photo we better distinguishes variation in dark scene than in relative light scene)
-(gradient photo to show the posterisation effect)
 
-after realizing this we found out that it was not interesting to distribute the color levels in a uniform way but more interesting to keep more details (and therefore more digital bits) in the dark levels. 
+![Gradient](../imgs/AboutColors/gammaOriginalGradient.jpg)
+
+
+![Linearly Encoded (only 32 levels (5 bits))](../imgs/AboutColors/gammaLinearlyEncoded.jpg)
+
+
+after realizing this we found out that it was not interesting to distribute the color levels in a uniform way but more interesting to keep more details (and therefore more digital bits) in the dark levels.
+
+![Gamma Encoded](../imgs/AboutColors/gammaGammaEncoded.png)
+
 and it makes sense, if we are numerically limited to describe a color it is interesting to put the more information where it is necessary for us, as humans.
 
-what we do in addition to color space conversion (linear transformation) and apply what is called a gamma curve ( nearly) a square root but it is not totally)
+what we do in addition to color space conversion (linear transformation) and apply what is called a gamma curve (nearly) a square root but it is not totally.
 
 # the problem
 
@@ -125,19 +135,22 @@ A perceptually uniform color space.
 
 In our case, it will be interesting to be able to measure distances between the colors to enable us to define the principal colors of an image by clustering the various colors of the target image.
 
-As we have just seen it to measure the different in space sRGB is not very relevant and we will thus place us in space CIE L*a*b to measure these distances with what one calls $\delta E$
+As we have just seen it to measure the different in space sRGB is not very relevant and we will thus place us in space CIE $L*a*b$ to measure these distances with what one calls $\delta E$
 
 ##  delta E
 
-The color difference (called $\delta E76$ or $\delta E_{ab}$) is a measure of the visual difference between two colors, in a perceptually uniform color space as L*a*b* established in 1976 by the International Commission on Illumination (CIE).
+The color difference (called $\delta E76$ or $\delta E_{ab}$) is a measure of the visual difference between two colors, in a perceptually uniform color space as $L*a*b*$ established in 1976 by the International Commission on Illumination (CIE).
 
-$$ \Delta E^*_{ab} ={\sqrt {(L_{2}^{*}-L_{1}^{*})^{2}+(a_{2}^{*}-a_{1}^{*})^{2}+(b_{2}^{*}-b_{1}^{*})^{2}}}} où :
+$$
+\Delta E^*_{ab} ={\sqrt {(L_2^*-L_1^*)^2+(a_2^*-a_1^*)^2+(b_2^*-b_1^*)^2}}
+$$
 
 > where: 
 > $L_1^*,*a_1^*,b_1^*$ are the coordinates in color space of the first color to be compared and $L_2^*,*a_2^*,b_2^*$ are those of the second.
-> is the Euclidean distance in L*a*b* space.
+> is the Euclidean distance in $L*a*b*$ space.
 
-(image exemple)
+![Two points in LAB color space](../imgs/AboutColors/labSpaceTwoPoints.png)
+
 Colors at equal distance in Lab space (so having the same delta E) should be perceived by the human eye as having the same color difference.
 
 This makes sense, measuring Directly distance in CIELAB space should work, right?
@@ -146,26 +159,74 @@ If the relative importance of luminance compared to saturation and hue is correc
 
 The example above demonstrates that for hues in the same lightness it works well. But what happens when we have two saturated colors of different hues?
 
-(image exemple)
-The two above blocks represent the dark blue and dark red and we see directly the problem, 
+![Two very different hues, highly saturated](../imgs/AboutColors/labSpaceTwoPoints2.png)
 
-This is why other more precise, but more complex formulas of ∆E have been developed by the CIE such as the ∆E94 and the ∆E00, whose names naturally recall the years of their publication.
+![Similar but with a wrong color difference](../imgs/AboutColors/labFailComparison.png)
+
+The two above blocks represent the dark blue and dark red and we see directly the problem, 
+they appear to be similar but not mathematicaly in this space.
+
+This is why other more precise, but more complex formulas of ∆E have been developed by the CIE such as the \delta E94 and the ∆E00, whose names naturally recall the years of their publication.
 
 So, in 1994, the original Delta E formula was improved. The new formula would take into account certain weighting factors for each lightness, chroma, and hue value. It also introduced the ability to add a modifier according to the use case: either textile, or graphic arts.
 
-(formulas Delta E94)
+$$
+\newcommand\arraystretch{1.8}
+\begin{array}{l}
+    \Delta E_{94}^*=\sqrt{\left(\frac{\Delta L^*}{k_L S_L}\right)^2+\left(\frac{\Delta C_{ab}^*}{k_C S_C}\right)^2+\left(\frac{\Delta H_{ab}^*}{k_H S_H}\right)^2} \\
+    \Delta L^*=L_1^*-L_2^* \\
+    C_1^*=\sqrt{a_1^{* 2}+b_1^{* 2}} \\
+    C_2^*=\sqrt{a_2^{* 2}+b_2^{* 2}} \\
+    \Delta C_{ab}^*=C_1^*-C_2^* \\
+    \Delta H_{ab}^*=\sqrt{\Delta E_{ab}^*{ }^*-\Delta L^{*^2}-\Delta C_{ab}^{* 2}}=\sqrt{\Delta a^{*^2}+\Delta b^{*^2}-\Delta C_{ab}^{* 2}} \\
+    \Delta a^*=a_1^*-a_2^* \\
+    \Delta b^*=b_1^*-b_2^* \\
+    S_L=1 \\
+    S_C=1+K_1 C_1^* \\
+    S_H=1+K_2 C_1^*
+\end{array}
+$$
 
-CIE94 introduced a conversion of the given Lab value into CIE L*C*h (Lch). The two color models differ in that Lch represents hue as an angle instead of infinite points of color. This allows us to more easily troubleshoot and perform calculations on hue.
+<p class="legend"> formulas Delta E94</p>
+
+CIE94 introduced a conversion of the given Lab value into CIE $L*C*h$ (Lch). The two color models differ in that Lch represents hue as an angle instead of infinite points of color. This allows us to more easily troubleshoot and perform calculations on hue.
 
 but if we took different colors with same lightness but opposite hue, $\delta E94$ will be equal to 128 (polar opposite in hue) while CIE2000 more correctly calculates ΔE 49.4 (middle of the road).
 
 Finally, the CIE organization decided to fix the lightness inaccuracies by introducing dE00. It’s currently the most complicated, yet most accurate, CIE color difference algorithm available.
 
-(de00 formulas)
+$$
+\newcommand\arraystretch{1.78}
 
+\begin{array}{l}
 
-Sources:
+    \Delta E_{00}^* = \sqrt{\left(\frac{\Delta L^\prime}{k_L S_L}\right)^2+\left(\frac{\Delta C^\prime}{k_C S_C}\right)^2+\left(\frac{\Delta H^\prime}{k_H S_H}\right)^2+R_{T} \frac{\Delta C^\prime}{k_C S_C} \frac{\Delta H^\prime}{k_H S_H}} \\
+    \Delta L^\prime=L_2^*-L_1^* \\
+    \bar{L}=\frac{L_1^*+L_2^*}{2} \quad \bar{C}=\frac{C_1^*+C_2^*}{2} \\
+    a_1^\prime=a_1^*+\frac{a_1^*}{2}\left(1-\sqrt{\frac{\bar{C}^7}{\bar{C}^7+25^\prime}}\right) \quad a_2^\prime=a_2^*+\frac{a_2^*}{2}\left(1-\sqrt{\frac{\bar{C}^7}{\bar{C}^7+25^\prime}}\right) \\
+    \bar{C}^\prime=\frac{C_1^\prime+C_2^\prime}{2} \text { and } \Delta C^\prime=C_2^\prime-C_1^\prime \quad \text { where } C_1^\prime=\sqrt{a_1^{\prime 2}+b_1^*} \quad C_2^\prime=\sqrt{a_2^{\prime 2}+b_2^*} \\
+    h_1^\prime=\operatorname{atan} 2\left(b_1^*, a_1^\prime\right) \bmod 360^{\circ}, \quad h_2^\prime=\operatorname{atan} 2\left(b_2^*, a_2^\prime\right) \bmod 360^{\circ} \\
+    \Delta h^\prime=\left\{
+    \begin{array}{ll}
+        h_2^\prime-h_1^\prime & \left|h_1^\prime-h_2^\prime\right| \leq 180^{\circ} \\
+        h_2^\prime-h_1^\prime+360^{\circ} & \left|h_1^\prime-h_2^\prime\right|>180^{\circ}, h_2^\prime \leq h_1^\prime \\
+        h_2^\prime-h_1^\prime-360^{\circ} & \left|h_1^\prime-h_2^\prime\right|>180^{\circ}, h_2^\prime>h_1^\prime
+    \end{array}\right. \\
 
+    \begin{array}{l}
+    \Delta H^\prime=2 \sqrt{C_1^\prime C_2^\prime} \sin \left(\Delta h^\prime / 2\right), \quad \bar{H}^\prime=\left\{\begin{array}{l}
+    \left(h_1^\prime+h_2^\prime+360^{\circ}\right) / 2 & \left|h_1^\prime-h_2^\prime\right|>180^{\circ} \\
+    \left(h_1^\prime+h_2^\prime\right) / 2 & \left|h_1^\prime-h_2^\prime\right| \leq 180^{\circ}
+    \end{array}\right. \\
+
+S_L=1+\frac{0.015(\bar{L}-50)^2}{\sqrt{20+(\bar{L}-50)^\prime}} \quad S_C=1+0.045 \bar{C}^\prime \quad S_H=1+0.015 \bar{C}^\prime T \\
+R_{T}=-2 \sqrt{\frac{\bar{C}^{\prime 7}}{\bar{C}^{\prime 7}+25^\prime}} \sin \left[60^{\circ} \cdot \exp \left(-\left[\frac{\bar{H}^\prime-275^\prime}{25^{\circ}}\right]^2\right)\right]
+\end{array}
+\end{array}
+$$
+
+### Sources:
 - [CIE](http://cie.co.at/)
-- [The CIEDE2000 Color-Difference
-Formula](http://www2.ece.rochester.edu/~gsharma/ciede2000/ciede2000noteCRNA.pdf)
+- [The Color-Difference Formula](http://www2.ece.rochester.edu/~gsharma/ciede2000/ciede2000noteCRNA.pdf)
+- [Gamma Correction](https://www.cambridgeincolour.com/tutorials/gamma-correction.htm)
+- [DeltaE](http://zschuessler.github.io/DeltaE/learn/)
