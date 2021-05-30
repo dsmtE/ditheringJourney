@@ -4,6 +4,16 @@
 
   import { onMount } from 'svelte';
   
+  import { base } from '$app/paths';
+
+  export async function load({ fetch }) {
+    const posts = await fetch(`${base}/index.json`)
+        .then((r) => r.json());
+    return {
+      props: { posts }
+    }
+  }
+
 	onMount(async () => {
     const postsFiles = import.meta.glob('../routes/articles/*.svx');
     const postsPromises = [];

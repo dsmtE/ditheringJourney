@@ -3,8 +3,9 @@
   "version": "0.0.1",
   "scripts": {
     "dev": "svelte-kit dev",
-    "build": "svelte-kit build",
     "preview": "svelte-kit preview",
+    "build": "shx rm -rf build && svelte-kit build && shx touch build/.nojekyll",
+    "deploy": "npm run build && npx gh-pages -d build -t true",
     "lint": "eslint ./src/**/*.{ts,svelte}",
     "lint:fix": "eslint --fix ./src/**/*.{ts,svelte}"
   },
@@ -18,6 +19,7 @@
     "cssnano": "^5.0.4",
     "eslint": "^7.27.0",
     "eslint-plugin-svelte3": "^3.2.0",
+    "gh-pages": "^3.2.0",
     "mdsvex": "^0.9.6",
     "postcss": "^8.3.0",
     "postcss-custom-selectors": "^6.0.0",
@@ -30,6 +32,7 @@
     "remark-emoji": "^2.2.0",
     "remark-github": "^10.1.0",
     "remark-math": "^3.0.1",
+    "shx": "^0.3.3",
     "svelte": "^3.34.0",
     "svelte-preprocess": "^4.7.1",
     "tailwindcss": "^2.1.1",
