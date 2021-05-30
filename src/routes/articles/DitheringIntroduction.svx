@@ -1,0 +1,102 @@
+---
+title: 'Dithering Introduction'
+slug: 'DitheringIntroduction'
+description: 'Introduction to the fabulous world of image dithering.'
+tags: [ ]
+published_at: '30/05/2021'
+---
+
+<script lang='ts'>
+    import PostHeader from '$lib/components/PostHeader.svelte';
+
+    // article scripts
+    import Gradient from './_scriptsComponents/Gradient.svelte';
+    import Threshold from './_scriptsComponents/Threshold.svelte';
+    import Dithering from './_scriptsComponents/Dithering.svelte';
+
+</script>
+
+<PostHeader {title} {published_at} {tags} />
+
+---
+
+# What Is Dithering ?
+
+When we work with any digital data, we sometimes need to quantize those data.
+This quantization can be useful, for example, to compress data (with loss) and thus transmit it more easily on the web, or to reduce its quality in order to work with less powerful hardware.
+
+**But** this quantization yields errors. These can introduce undesirable artificial artefacts (unpredictable background noise in audio spectrum or banding in image for example).
+
+The audio field is a good example of this. The human ear works a bit like a Fourier transform, in which it hears individual frequencies. Therefore, the ear is very sensitive to distortion, or additional frequency content, but much less sensitive to additional random noise at all frequencies.
+
+Adding random noise at a very low level, called **dither**, to the audio signal before quantization helps a lot to reduce the appearance of random frequencies in favor of a low constant noise that is much less perceptible to the human ear.
+
+Dithering, in its broadest sense, is a technique used to fix quantization errors by introducing *noise* to improve the overall quality of digital data like audio signals or images.
+
+## Dithering in image processing
+
+Dithering is used in image processing to create the illusion of color depth in images on systems with a limited color palette. 
+
+The basic concept behind dithering is adding noise, and patterns of pixels to improve the image quality while avoiding banding. In a dithered image, colors that are not available in the palette are approximated by a diffusion of colored pixels from within the available palette. That takes advantage of the human eye's tendency to "mix" two colors in close proximity to one another. As human eyes does spatial averaging, they perceives the diffusion/noise as a mixture of the colors within it. 
+
+A common use of dithering is converting a greyscale image to black and white, such that the density of black dots in the new image approximates the average grey level in the original.
+
+This example of gradient below use a technique called **ordered dithering**:
+<Gradient step={4} />
+
+One common application of dithering is to more accurately display graphics containing a greater range of colors than the display hardware is capable of showing.
+
+An example of this can be seen in the game Midwinte, an old Amiga game:
+
+![Midwinter1989](../imgs/Dithering/Midwinter1989.jpg)
+
+For example, dithering might be used in order to display a photographic image containing [millions of colors](https://en.wikipedia.org/wiki/24-bit_color) on video hardware that is only capable of showing 256 colors at a time. The 256 available colors would be used to generate a dithered approximation of the original image. Without dithering, the colors in the original image would be quantized to the closest available color, resulting in a displayed image that is a poor representation of the original.
+
+## Context and history of Dithering
+
+Mostly forgotten, I found on Wikipedia a quite interesting fact about when dithering was first used in World War II for bomb trajectories and navigation.
+
+However, That use differs greatly from dithering as we know it today. 
+
+> …One of the earliest applications of dither came in World War II. Airplane bombers used mechanical computers to perform navigation and bomb trajectory calculations. Curiously, these computers (boxes filled with hundreds of gears and cogs) performed more accurately when flying on board the aircraft, and less well on ground. Engineers realized that the vibration from the aircraft reduced the error from sticky moving parts. Instead of moving in short jerks, they moved more continuously. Small vibrating motors were built into the computers, and their vibration was called dither from the Middle English verb "didderen," meaning "to tremble." Today, when you tap a mechanical meter to increase its accuracy, you are applying dither, and modern dictionaries define dither as a highly nervous, confused, or agitated state. In minute quantities, dither successfully makes a digitization system a little more analog in the good sense of the word.
+>
+> — Ken Pohlmann, *Principles of Digital Audio*[1\]
+
+## Dithering for printing
+
+In its earlier uses in newspapers, comic books, and other printed media, dithering would be applied to images to create levels of simulated grayscale by strategic placement of black dots. Using the dithering process would give a smooth image with gray shades even though printing presses only supported black ink.
+
+Comic books and other color printing worked similarly, but to simulate more shades of color than the limited palette printing presses had. Below is a sample of how printing presses processed high-quality images into a dithered image.
+
+![newspaper sample](../imgs/Dithering/newsPaperSample.png)
+
+Dithering has been very pioneered by the printing industry, which traditionally used black ink on white paper. The most simple technique to render images in black and white is to use a **threshold**, so that all pixels darker than a certain value are coloured black. As seen in the image below, thresholding yields very poor results:
+
+<Threshold />
+
+More recently, dithering has become popular in [web graphics](https://www.lifewire.com/when-to-use-certain-image-formats-3467831). Even though most of the population has access to high-speed internet, there is still a modest percentage of internet users that are reliant upon dial-up. Using dithering in image processing not only reduces banding of colors and shading, which creates a smoother finished image, but it also reduces the file size. This is used in the GIF well-known format.
+
+![](../imgs/Dithering/GIFDithering.gif)
+
+<p class="legend"> The first image is a banded image. You can clearly see the transitions in color.</p>
+
+
+---
+
+This is the result that can be obtained with different dithering methods on a grayscale image.
+
+<Dithering />
+
+We will see more in detail in a future article how the algorithms work and the different methods that exist, their pros and cons.
+
+But before that, it is necessary to talk a little about colors. 
+So far we have been working mainly with grayscale images, but the wonderful world of colors needs more context. That's why the next article will be about color and how to define it.
+
+<style>
+
+img[alt="color Dithered Gradients"] { width: 200px; }
+img[alt="newspaper sample"] { width: 300px; }
+img[alt="Midwinter1989"] { width: 400px; }
+
+
+</style>

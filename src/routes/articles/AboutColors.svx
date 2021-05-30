@@ -3,7 +3,7 @@ title: 'About Colors'
 slug: 'AboutColors'
 description: 'About the science of color and the fascinating world of human perception and the scientists that attempt to define it.'
 tags: [ ]
-published_at: ''
+published_at: '30/05/2021'
 ---
 
 <script lang='ts'>

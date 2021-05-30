@@ -41,6 +41,7 @@
   "dependencies": {
     "@fontsource/montserrat": "^4.3.0",
     "@fontsource/oswald": "^4.3.0",
+    "mathjs": "^9.4.1",
     "rehype-figure": "^1.0.1",
     "svrollbar": "^0.10.4"
   },
